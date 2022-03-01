@@ -25,6 +25,7 @@ export default function Application(props) {
       time={appointment.time}
       interview={interview}
       interviewers={interviewers}
+      bookInterview={bookInterview}
       />
     );
   });
@@ -39,6 +40,24 @@ export default function Application(props) {
       setState(prev => ({...prev, days: days.data, appointments: appointments.data, interviewers: interviewers.data}))
     })
   }, []);
+
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios
+      .put(`/api/appointments/${id}`, appointments[id])
+      .then((res) => {
+        setState({...state, appointments})
+      })
+      .catch((err) => console.log('error:', err))
+  };
     
   return (
     <main className="layout">
