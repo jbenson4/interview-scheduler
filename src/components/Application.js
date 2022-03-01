@@ -27,6 +27,7 @@ export default function Application(props) {
       interviewers={interviewers}
       bookInterview={bookInterview}
       cancelInterview={cancelInterview}
+      editInterview={editInterview}
       />
     );
   });
@@ -76,6 +77,24 @@ export default function Application(props) {
       })
       .catch((err) => console.log('error: ', err))
   }
+
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios
+      .put(`/api/appointments/${id}`, appointments[id])
+      .then((res) => {
+        setState({...state, appointments})
+      })
+      .catch((err) => console.log('error:', err))
+  };
     
   return (
     <main className="layout">
