@@ -36,7 +36,8 @@ export default function useApplicationData(initial) {
     return axios
       .put(`/api/appointments/${id}`, appointments[id])
       .then((res) => {
-        setState({...state, appointments})
+        const days = updateSpots(appointments);
+        setState({...state, appointments, days})
       })
   };
 
@@ -52,11 +53,33 @@ export default function useApplicationData(initial) {
     return axios
       .delete(`/api/appointments/${id}`, appointments[id])
       .then((res) => {
-        setState({...state, appointments})
+        const days = updateSpots(appointments);
+        setState({...state, appointments, days})
       })
   };
     
+  function updateSpots(appointments) {
+    const { days } = state;
+    const newDays = [...state.days];
+    for (const day of days) {
+      let count = 0;
+      let index = days.indexOf(day)
+      for (const time of day.appointments) {
+        if (appointments[time].interview === null) {
+          count += 1;
+        }
+      }
+      newDays[index].spots = count;
+    }
+    return newDays;
+  }
+  
   return (
-    { state, bookInterview, cancelInterview, setDay }
+    { state,
+      bookInterview,
+      cancelInterview,
+      setDay,
+      updateSpots
+    }
   );
 }
