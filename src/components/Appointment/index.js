@@ -30,17 +30,19 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview)
+    props
+      .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE, true))
-  };
+      .catch(() => transition(ERROR_SAVE, true));
+  }
 
   function destroy() {
     transition(DELETE, true);
-    props.cancelInterview(props.id)
+    props
+      .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch(() => transition(ERROR_DELETE, true))
-  };
+      .catch(() => transition(ERROR_DELETE, true));
+  }
 
   return (
     <article className="appointment">
@@ -87,9 +89,19 @@ export default function Appointment(props) {
         />
       )}
 
-      {mode === ERROR_DELETE && <Error message={'Could not cancel appointment.'} onClose={() => back()}/>}
+      {mode === ERROR_DELETE && (
+        <Error
+          message={"Could not cancel appointment."}
+          onClose={() => back()}
+        />
+      )}
 
-      {mode === ERROR_SAVE && <Error message={'Could not create appointment.'} onClose={() => back()}/>}
+      {mode === ERROR_SAVE && (
+        <Error
+          message={"Could not create appointment."}
+          onClose={() => back()}
+        />
+      )}
     </article>
   );
 }
