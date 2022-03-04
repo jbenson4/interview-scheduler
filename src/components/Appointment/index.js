@@ -9,7 +9,10 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import useVisualMode from "hooks/useVisualMode";
 
+// Component for creating an interview appointment
 export default function Appointment(props) {
+
+  // Create mode variables
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -20,28 +23,30 @@ export default function Appointment(props) {
   const DELETE = "DELETE";
   const EDIT = "EDIT";
 
+  // Use custom hook to set state based on whether interview exists or not
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
+  // Function to create an interview
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer,
     };
-    transition(SAVING);
+    transition(SAVING);  // Show status message after confirming appointment 
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE, true));
+      .catch(() => transition(ERROR_SAVE, true));  // Display error message if issue during axios PUT request
   }
 
   function destroy() {
-    transition(DELETE, true);
+    transition(DELETE, true);  // Transition with parameter 'true' to show correct component after deletion
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch(() => transition(ERROR_DELETE, true));
+      .catch(() => transition(ERROR_DELETE, true));  // Display error message if issue during axios DELETE request
   }
 
   return (

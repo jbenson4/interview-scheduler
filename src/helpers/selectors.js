@@ -1,3 +1,4 @@
+// Construct and return an object with the appointments for each day
 export function getAppointmentsForDay(state, day) {
   const appointmentArray = [];
   for (const dayObj of state.days) {
@@ -16,6 +17,7 @@ export function getAppointmentsForDay(state, day) {
   return appointmentObjects;
 }
 
+// Construct and return an object with all the interview data (student & interviewer info)
 export function getInterview(state, interview) {
   if (!interview) {
     return null;
@@ -32,6 +34,7 @@ export function getInterview(state, interview) {
   return interviewObj;
 }
 
+// Construct and return an object with the available interviewers for each day
 export function getInterviewersForDay(state, day) {
   const interviewerArray = [];
   for (const dayObj of state.days) {

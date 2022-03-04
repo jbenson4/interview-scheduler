@@ -1,9 +1,11 @@
 import { useState } from "react";
 
+// Custom hook for handling state between appointment cards
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
+  // Transition function with capability to replace previous state
   const transition = function (newMode, replace = false) {
     setHistory((prev) => {
       const newHistory = [...prev];
@@ -16,6 +18,7 @@ export default function useVisualMode(initial) {
     setMode(newMode);
   };
 
+  // Function to go back one previous state in the state history
   const back = function () {
     if (history.length === 1) {
       return;

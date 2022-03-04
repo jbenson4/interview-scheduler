@@ -1,5 +1,6 @@
 import React from "react";
 
+// Component for showing errors during interview creation or deletion
 export default function Error(props) {
   return (
     <main className="appointment__card appointment__card--error">

@@ -1,5 +1,6 @@
 import React from "react";
 
+// Component for showing an existing interview
 export default function Show(props) {
   return (
     <main className="appointment__card appointment__card--show">

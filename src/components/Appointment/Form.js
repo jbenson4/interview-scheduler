@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
+// Component for creating an interview
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  // Reset student and interviewer inputs to default values
   const reset = () => {
     setInterviewer(null);
     setStudent("");
@@ -16,6 +18,7 @@ export default function Form(props) {
     props.onCancel();
   };
 
+  // Validate student and/or interviewer inputs are not blank
   const validate = () => {
     if (student === "") {
       setError("Student name cannot be blank");
@@ -25,7 +28,7 @@ export default function Form(props) {
       setError("Interviewer must be chosen");
       return;
     }
-    setError("");
+    setError(""); // Remove error message upon receiving valid inputs
     props.onSave(student, interviewer);
   };
 

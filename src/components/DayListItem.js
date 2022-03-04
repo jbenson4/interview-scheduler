@@ -2,6 +2,7 @@ import React from "react";
 import "components/DayListItem.scss";
 import classNames from "classnames";
 
+// Component for showing each day of the week and the available spots remaining
 export default function DayListItem(props) {
   const formatSpots = () => {
     let spots = null;

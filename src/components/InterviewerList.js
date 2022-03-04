@@ -3,7 +3,9 @@ import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
 import PropTypes from "prop-types";
 
+// Component for holding all the InterviewerListItems
 function InterviewerList(props) {
+  // Map over each interviewer in the interviewer props and pass props to InterviewerListItems
   const interviewerArray = props.interviewers.map((interviewer) => (
     <InterviewerListItem
       key={interviewer.id}

@@ -29,6 +29,7 @@ export default function useApplicationData(initial) {
     });
   }, []);
 
+  // Create an interview, send an axios PUT request, and modify the state to reflect changes
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -46,6 +47,7 @@ export default function useApplicationData(initial) {
       });
   }
 
+  // Cancel an interview, send an axios DELETE request, and modify the state to reflect changes
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -63,6 +65,7 @@ export default function useApplicationData(initial) {
       });
   }
 
+  // Find available interview spots by looping through each day's appoinment array and confirming interview value is 'null'
   function updateSpots(appointments) {
     const { days } = state;
     const newDays = [...state.days];
